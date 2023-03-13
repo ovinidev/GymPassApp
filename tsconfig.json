@@ -32,6 +32,9 @@
 		"paths": {
 			"@env/*": ["./src/env/*"],
 			"@app/*": ["./src/app/*"],
+			"@repositories/*": ["./src/repositories/*"],
+			"@services/*": ["./src/services/*"],
+			"@useCases/*": ["./src/useCases/*"],
 			"@/*": ["./src/*"]
 		},
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
