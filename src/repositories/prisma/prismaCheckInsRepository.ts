@@ -1,5 +1,5 @@
 import { prisma } from '@services/prisma';
-import { Prisma } from '@prisma/client';
+import { CheckIn, Prisma } from '@prisma/client';
 import { CheckInsRepository } from '@repositories/contracts/checkInsRepository';
 
 export class PrismaCheckInsRepository implements CheckInsRepository {
@@ -31,5 +31,19 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
 		});
 
 		return checkIn;
+	}
+
+	findManyByUserId(userId: string, page: number): Promise<CheckIn[]> {
+		throw new Error('Method not implemented.');
+	}
+
+	async countByUserId(userId: string): Promise<number> {
+		const count = await prisma.checkIn.count({
+			where: {
+				id: userId,
+			},
+		});
+
+		return count;
 	}
 }

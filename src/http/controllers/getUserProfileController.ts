@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
-import { makeGetUserProfile } from '@useCases/factories/makeGetUserProfile';
+import { makeGetUserProfileUseCase } from '@useCases/factories/makeGetUserProfileUseCase';
 import { UserNotFoundError } from '@useCases/errors/userNotFoundError';
 
 export async function getUserProfileController(
@@ -12,7 +12,7 @@ export async function getUserProfileController(
 		// @ts-ignore
 		const { userId } = request.params;
 
-		const getUserProfileUseCase = makeGetUserProfile();
+		const getUserProfileUseCase = makeGetUserProfileUseCase();
 
 		const user = await getUserProfileUseCase.execute({ userId });
 
