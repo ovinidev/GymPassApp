@@ -9,7 +9,7 @@ import { randomUUID } from 'node:crypto';
 export class InMemoryGymsRepository implements GymsRepository {
 	gyms: Gym[] = [];
 
-	async create(data: Prisma.GymCreateInput): Promise<Gym> {
+	async create(data: Prisma.GymCreateInput) {
 		const gym = {
 			name: data.name,
 			description: data.description,
@@ -24,7 +24,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	async findById(id: string): Promise<Gym | null> {
+	async findById(id: string) {
 		const gym = this.gyms.find((gym) => {
 			return gym.id === id;
 		});
@@ -50,7 +50,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	async findManyNearby(coordinates: FindManyNearby): Promise<Gym[]> {
+	async findManyNearby(coordinates: FindManyNearby) {
 		const gymsNearby = this.gyms.filter((gym) => {
 			const distance = getDistanceBetweenCoordinate(
 				{

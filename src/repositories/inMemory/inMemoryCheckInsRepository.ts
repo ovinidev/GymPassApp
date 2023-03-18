@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto';
 export class inMemoryCheckInsRepository implements CheckInsRepository {
 	checkIns: CheckIn[] = [];
 
-	async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
+	async create(data: Prisma.CheckInUncheckedCreateInput) {
 		const checkIn = {
 			created_at: data.created_at ? data.created_at : new Date(),
 			gym_id: data.gym_id,
@@ -20,7 +20,7 @@ export class inMemoryCheckInsRepository implements CheckInsRepository {
 		return checkIn;
 	}
 
-	async findById(id: string): Promise<CheckIn | null> {
+	async findById(id: string) {
 		const checkIn = this.checkIns.find((checkIn) => checkIn.id === id);
 
 		if (!checkIn) return null;
@@ -28,10 +28,7 @@ export class inMemoryCheckInsRepository implements CheckInsRepository {
 		return checkIn;
 	}
 
-	async findByUserIdOnDate(
-		userId: string,
-		date: Date,
-	): Promise<CheckIn | null> {
+	async findByUserIdOnDate(userId: string, date: Date) {
 		const startOfTheCurrentData = dayjs(date).startOf('date');
 		const endOfTheCurrentData = dayjs(date).endOf('date');
 
@@ -62,7 +59,7 @@ export class inMemoryCheckInsRepository implements CheckInsRepository {
 		return checkIns;
 	}
 
-	async countByUserId(userId: string): Promise<number> {
+	async countByUserId(userId: string) {
 		const checkIns = this.checkIns.filter(
 			(checkIn) => checkIn.user_id === userId,
 		).length;
@@ -70,7 +67,7 @@ export class inMemoryCheckInsRepository implements CheckInsRepository {
 		return checkIns;
 	}
 
-	async save(checkIn: CheckIn): Promise<CheckIn> {
+	async save(checkIn: CheckIn) {
 		const checkInIndex = this.checkIns.findIndex(
 			(item) => item.id === checkIn.id,
 		);

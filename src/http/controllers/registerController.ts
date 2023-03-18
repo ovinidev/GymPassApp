@@ -2,7 +2,7 @@ import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
 import { UserAlreadyExistsError } from '@useCases/errors/userAlreadyExistsError';
-import { zodErrorsFormatted } from './errors/zodErrorsFormatted';
+import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
 import { makeRegisterUseCase } from '@useCases/factories/makeRegisterUseCase';
 
 export async function registerController(
@@ -10,6 +10,8 @@ export async function registerController(
 	reply: FastifyReply,
 ) {
 	try {
+		const body = request.body;
+
 		const registerUserBodySchema = z.object({
 			name: z.string({ required_error: 'name is required' }),
 			email: z
@@ -20,9 +22,7 @@ export async function registerController(
 				.min(6, { message: 'password must have 6 characters' }),
 		});
 
-		const { email, name, password } = registerUserBodySchema.parse(
-			request.body,
-		);
+		const { email, name, password } = registerUserBodySchema.parse(body);
 
 		const registerUseCase = makeRegisterUseCase();
 
@@ -35,10 +35,11 @@ export async function registerController(
 		}
 
 		if (err instanceof ZodError) {
-			zodErrorsFormatted({
+			const errors = zodErrorsFormatted({
 				err,
-				reply,
 			});
+
+			return reply.status(400).send(errors);
 		}
 
 		throw err;

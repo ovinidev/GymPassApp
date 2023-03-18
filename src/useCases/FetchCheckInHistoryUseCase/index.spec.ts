@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { FetchCheckInHistory } from '.';
+import { FetchCheckInHistoryUseCase } from '.';
 import { CheckInsRepository } from '@repositories/contracts/checkInsRepository';
 import { inMemoryCheckInsRepository } from '@repositories/inMemory/inMemoryCheckInsRepository';
 import { randomUUID } from 'node:crypto';
 
 let checkInsRepository: CheckInsRepository;
-let sut: FetchCheckInHistory;
+let sut: FetchCheckInHistoryUseCase;
 
 describe('Fetch check in use case', () => {
 	beforeEach(() => {
 		checkInsRepository = new inMemoryCheckInsRepository();
-		sut = new FetchCheckInHistory(checkInsRepository);
+		sut = new FetchCheckInHistoryUseCase(checkInsRepository);
 	});
 
 	it('should be able to fetch check in history', async () => {

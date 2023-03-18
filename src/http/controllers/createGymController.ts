@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from './errors/zodErrorsFormatted';
+import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
 import { makeCreateGymUseCase } from '@useCases/factories/makeCreateGymUseCase';
 
 export async function createGymController(
@@ -9,7 +9,9 @@ export async function createGymController(
 	reply: FastifyReply,
 ) {
 	try {
-		const registerUserBodySchema = z.object({
+		const body = request.body;
+
+		const createGymBodySchema = z.object({
 			name: z.string({ required_error: 'name is required' }),
 			description: z.string().nullable().optional(),
 			latitude: z.number({ required_error: 'latitude is required' }),
@@ -18,7 +20,7 @@ export async function createGymController(
 		});
 
 		const { latitude, longitude, name, description, phone } =
-			registerUserBodySchema.parse(request.body);
+			createGymBodySchema.parse(body);
 
 		const createGymUseCase = makeCreateGymUseCase();
 
@@ -33,10 +35,11 @@ export async function createGymController(
 		return reply.status(201).send(gym);
 	} catch (err) {
 		if (err instanceof ZodError) {
-			zodErrorsFormatted({
+			const errors = zodErrorsFormatted({
 				err,
-				reply,
 			});
+
+			return reply.status(400).send(errors);
 		}
 
 		throw err;

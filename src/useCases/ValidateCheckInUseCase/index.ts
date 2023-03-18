@@ -22,14 +22,14 @@ export class ValidateCheckInUseCase {
 
 		if (!checkIn) throw new checkInNotFoundError();
 
-		const checkInValidationLimitInMinutes = 20;
-
 		const checkInCreatedAt = dayjs(checkIn.created_at);
 		const currentDate = dayjs(new Date());
 
 		const diffInMinutes = currentDate.diff(checkInCreatedAt, 'minutes');
 
-		if (diffInMinutes > checkInValidationLimitInMinutes) {
+		const CHECK_IN_VALIDATION_IN_MINUTES = 20;
+
+		if (diffInMinutes > CHECK_IN_VALIDATION_IN_MINUTES) {
 			throw new CheckInValidationTimeLimitError();
 		}
 

@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from './errors/zodErrorsFormatted';
+import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
 import { InvalidCredentialError } from '@useCases/errors/invalidCredentialError';
 import { makeAuthenticateUseCase } from '@useCases/factories/makeAuthenticateUseCase';
 
@@ -44,10 +44,11 @@ export async function authenticateController(
 		}
 
 		if (err instanceof ZodError) {
-			zodErrorsFormatted({
+			const errors = zodErrorsFormatted({
 				err,
-				reply,
 			});
+
+			return reply.status(400).send(errors);
 		}
 
 		throw err;
