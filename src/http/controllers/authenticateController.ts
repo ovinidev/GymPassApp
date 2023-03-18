@@ -10,6 +10,8 @@ export async function authenticateController(
 	reply: FastifyReply,
 ) {
 	try {
+		const body = request.body;
+
 		const authenticateUserBodySchema = z.object({
 			email: z
 				.string({ required_error: 'email is required' })
@@ -19,17 +21,23 @@ export async function authenticateController(
 				.min(6, { message: 'password must have 6 characters' }),
 		});
 
-		const { email, password } = authenticateUserBodySchema.parse(request.body);
+		const { email, password } = authenticateUserBodySchema.parse(body);
 
 		const authenticateUseCase = makeAuthenticateUseCase();
 
 		const { user } = await authenticateUseCase.execute({ email, password });
 
-		return reply.status(201).send({
-			id: user.id,
-			name: user.name,
-			email: user.email,
-		});
+		const token = await reply.jwtSign(
+			{},
+			{
+				sign: {
+					sub: user.id,
+					expiresIn: '1d',
+				},
+			},
+		);
+
+		return reply.status(200).send({ token });
 	} catch (err) {
 		if (err instanceof InvalidCredentialError) {
 			return reply.status(400).send({ message: err.message });

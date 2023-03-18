@@ -14,7 +14,7 @@ export class PrismaGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	async findById(id: string): Promise<Gym | null> {
+	async findById(id: string) {
 		const gym = await prisma.gym.findUnique({
 			where: {
 				id,
@@ -24,15 +24,26 @@ export class PrismaGymsRepository implements GymsRepository {
 		return gym;
 	}
 
-	searchManyByName(
-		name: string,
-		page: number,
-		pageLength: number,
-	): Promise<Gym[] | null> {
-		throw new Error('Method not implemented.');
+	async searchManyByName(name: string, page: number, pageLength: number) {
+		const gyms = await prisma.gym.findMany({
+			where: {
+				name: {
+					contains: name,
+				},
+			},
+			skip: (page - 1) * pageLength,
+			take: pageLength,
+		});
+
+		return gyms;
 	}
 
-	findManyNearby(coordinates: FindManyNearby): Promise<Gym[]> {
-		throw new Error('Method not implemented.');
+	async findManyNearby({ latitude, longitude }: FindManyNearby) {
+		const gyms = await prisma.$queryRaw<Gym[]>`
+			SELECT * FROM gyms
+			WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+		`;
+
+		return gyms;
 	}
 }

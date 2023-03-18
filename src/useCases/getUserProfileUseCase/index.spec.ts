@@ -25,7 +25,7 @@ describe('Register use case', () => {
 			password_hash: await hash('123456', 6),
 		});
 
-		const user = await sut.execute({ userId });
+		const { user } = await sut.execute({ userId });
 
 		expect(user).toBeTruthy();
 	});

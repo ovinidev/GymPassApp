@@ -3,8 +3,8 @@ import { GymsRepository } from '@repositories/contracts/gymsRepository';
 
 interface CreateGymUseCaseRequest {
 	name: string;
-	description: string | null;
-	phone: string;
+	description?: string | null;
+	phone?: string | null;
 	latitude: number;
 	longitude: number;
 }

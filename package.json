@@ -15,6 +15,15 @@
 	"keywords": [],
 	"author": "Vini",
 	"license": "MIT",
+	"dependencies": {
+		"@fastify/jwt": "6.7.0",
+		"@prisma/client": "4.11.0",
+		"bcryptjs": "2.4.3",
+		"dayjs": "1.11.7",
+		"dotenv": "16.0.3",
+		"fastify": "4.14.1",
+		"zod": "3.21.4"
+	},
 	"devDependencies": {
 		"@types/bcryptjs": "2.4.2",
 		"@types/node": "18.14.6",
@@ -29,13 +38,5 @@
 		"typescript": "4.9.5",
 		"vite-tsconfig-paths": "4.0.5",
 		"vitest": "0.29.2"
-	},
-	"dependencies": {
-		"@prisma/client": "4.11.0",
-		"bcryptjs": "2.4.3",
-		"dayjs": "1.11.7",
-		"dotenv": "16.0.3",
-		"fastify": "4.14.1",
-		"zod": "3.21.4"
 	}
 }
