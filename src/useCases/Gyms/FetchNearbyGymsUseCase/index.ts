@@ -23,8 +23,6 @@ export class FetchNearbyGymsUseCase {
 			longitude: userLongitude,
 		});
 
-		console.log('gyms');
-
 		if (!gyms) throw new GymNotFoundError();
 
 		return { gyms };

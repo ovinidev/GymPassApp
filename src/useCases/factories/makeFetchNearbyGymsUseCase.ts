@@ -1,5 +1,5 @@
 import { PrismaGymsRepository } from '@repositories/prisma/prismaGymsRepository';
-import { FetchNearbyGymsUseCase } from '@useCases/FetchNearbyGymsUseCase';
+import { FetchNearbyGymsUseCase } from '@useCases/Gyms/FetchNearbyGymsUseCase';
 
 export function makeFetchNearbyGymsUseCase() {
 	const prismaGymsRepository = new PrismaGymsRepository();

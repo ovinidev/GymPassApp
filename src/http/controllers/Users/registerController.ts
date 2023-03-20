@@ -2,7 +2,7 @@ import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
 import { UserAlreadyExistsError } from '@useCases/errors/userAlreadyExistsError';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeRegisterUseCase } from '@useCases/factories/makeRegisterUseCase';
 
 export async function registerController(

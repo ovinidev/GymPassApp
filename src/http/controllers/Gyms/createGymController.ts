@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeCreateGymUseCase } from '@useCases/factories/makeCreateGymUseCase';
 
 export async function createGymController(

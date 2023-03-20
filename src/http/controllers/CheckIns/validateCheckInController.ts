@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeValidateCheckInUseCase } from '@useCases/factories/makeValidateCheckInUseCase';
 import { CheckInValidationTimeLimitError } from '@useCases/errors/checkInValidationTimeLimitError';
 import { checkInNotFoundError } from '@useCases/errors/checkInNotFoundError';

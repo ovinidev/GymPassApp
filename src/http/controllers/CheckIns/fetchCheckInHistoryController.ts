@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeFetchCheckInHistoryUseCase } from '@useCases/factories/makeFetchCheckInHistoryUseCase';
 
 export async function fetchCheckInHistoryController(
@@ -13,10 +13,8 @@ export async function fetchCheckInHistoryController(
 		const query = request.query;
 
 		const fetchCheckInQuerySchema = z.object({
-			page: z.string({ required_error: 'page is required' }).transform(Number),
-			pageLength: z
-				.string({ required_error: 'pageLength is required' })
-				.transform(Number),
+			page: z.coerce.number({ required_error: 'page is required' }),
+			pageLength: z.coerce.number({ required_error: 'pageLength is required' }),
 		});
 
 		const { page, pageLength } = fetchCheckInQuerySchema.parse(query);

@@ -31,10 +31,11 @@
 		"baseUrl": "./",
 		"paths": {
 			"@env/*": ["./src/env/*"],
-			"@app/*": ["./src/app/*"],
+			"@http/*": ["./src/http/*"],
 			"@repositories/*": ["./src/repositories/*"],
 			"@services/*": ["./src/services/*"],
 			"@useCases/*": ["./src/useCases/*"],
+			"@utils/*": ["./src/utils/*"],
 			"@/*": ["./src/*"]
 		},
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

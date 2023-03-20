@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeCheckInUseCase } from '@useCases/factories/makeCheckInUseCase';
 import { GymNotFoundError } from '@useCases/errors/gymNotFoundError';
 import { MaxDistanceError } from '@useCases/errors/maxDistanceError';

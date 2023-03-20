@@ -1,7 +1,7 @@
 import { FastifyReply } from 'fastify';
 import { FastifyRequest } from 'fastify';
 import { z, ZodError } from 'zod';
-import { zodErrorsFormatted } from '../../utils/zodErrorsFormatted';
+import { zodErrorsFormatted } from '@utils/zodErrorsFormatted';
 import { makeFetchNearbyGymsUseCase } from '@useCases/factories/makeFetchNearbyGymsUseCase';
 import { GymNotFoundError } from '@useCases/errors/gymNotFoundError';
 
@@ -13,12 +13,12 @@ export async function fetchNearbyGymsController(
 		const query = request.query;
 
 		const fetchNearbyBodySchema = z.object({
-			userLatitude: z
-				.string({ required_error: 'userLatitude is required' })
-				.transform(Number),
-			userLongitude: z
-				.string({ required_error: 'userLongitude is required' })
-				.transform(Number),
+			userLatitude: z.coerce.number({
+				required_error: 'userLatitude is required',
+			}),
+			userLongitude: z.coerce.number({
+				required_error: 'userLongitude is required',
+			}),
 		});
 
 		const { userLatitude, userLongitude } = fetchNearbyBodySchema.parse(query);

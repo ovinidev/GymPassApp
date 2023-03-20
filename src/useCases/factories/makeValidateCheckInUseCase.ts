@@ -1,5 +1,5 @@
 import { PrismaCheckInsRepository } from '@repositories/prisma/prismaCheckInsRepository';
-import { ValidateCheckInUseCase } from '@useCases/ValidateCheckInUseCase';
+import { ValidateCheckInUseCase } from '@useCases/CheckIns/ValidateCheckInUseCase';
 
 export function makeValidateCheckInUseCase() {
 	const checkInsRepository = new PrismaCheckInsRepository();
