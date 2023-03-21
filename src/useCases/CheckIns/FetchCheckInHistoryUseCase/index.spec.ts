@@ -7,7 +7,7 @@ import { randomUUID } from 'node:crypto';
 let checkInsRepository: CheckInsRepository;
 let sut: FetchCheckInHistoryUseCase;
 
-describe('Fetch check in use case', () => {
+describe('Fetch check in history use case', () => {
 	beforeEach(() => {
 		checkInsRepository = new inMemoryCheckInsRepository();
 		sut = new FetchCheckInHistoryUseCase(checkInsRepository);
