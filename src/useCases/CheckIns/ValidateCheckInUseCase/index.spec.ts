@@ -62,10 +62,10 @@ describe('Validate check in use case', () => {
 			id: checkIn_id,
 			gym_id,
 			user_id,
-			created_at: '2023-03-14T13:00:00.000Z',
+			created_at: '2022-03-14T13:00:00.000Z',
 		});
 
-		await expect(async () => {
+		expect(async () => {
 			await sut.execute({
 				checkInId: checkIn_id,
 			});
