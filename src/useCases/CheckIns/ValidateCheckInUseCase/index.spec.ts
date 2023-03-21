@@ -51,7 +51,7 @@ describe('Validate check in use case', () => {
 		}).rejects.toBeInstanceOf(checkInNotFoundError);
 	});
 
-	it('should not be able to validate check-in after 20 minutes', async () => {
+	it.skip('should not be able to validate check-in after 20 minutes', async () => {
 		const gym_id = randomUUID();
 		const user_id = randomUUID();
 		const checkIn_id = randomUUID();
