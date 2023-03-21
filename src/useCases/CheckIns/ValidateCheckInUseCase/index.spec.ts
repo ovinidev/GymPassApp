@@ -65,7 +65,7 @@ describe('Validate check in use case', () => {
 			created_at: '2023-03-14T13:00:00.000Z',
 		});
 
-		expect(async () => {
+		await expect(async () => {
 			await sut.execute({
 				checkInId: checkIn_id,
 			});
